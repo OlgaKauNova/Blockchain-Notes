@@ -14,15 +14,15 @@ namespace blockchain
 		public Note(string text)
 		{
 			this.text = text;
-			ComputeHash(text);
+			this.hash = ComputeHash(text);
 		}
 
-		private void ComputeHash(string text)
+		private byte[] ComputeHash(string text)
 		{
 			SHA256 sha = SHA256.Create(); //Creating SHA256 object
 			byte[] textBytes = Encoding.Default.GetBytes(text); //Converting text to bytes
 
-			this.hash = sha.ComputeHash(textBytes); //Computing bytes to hash
+			return sha.ComputeHash(textBytes); //Computing bytes to hash
 		}
 
 		///<Summary>Full text of the note</Summary>
@@ -53,8 +53,8 @@ namespace blockchain
 			{
 				//We need to compute hash every time we checking it
 				//So we will be sure it is valid
-				ComputeHash(this.text); 
-				return Encoding.Default.GetString(this.hash);
+				var hash = ComputeHash(this.text); 
+				return Encoding.Default.GetString(hash);
 			}
 		}
 
