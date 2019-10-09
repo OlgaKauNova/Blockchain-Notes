@@ -103,6 +103,7 @@ namespace blockchain
 				else
 				{
 					Console.ForegroundColor = ConsoleColor.White;
+					
 					//If current note's hash part of the text equal hash of the previous note
 					//then it's okay
 					if(@notes[i].PreviousHash == @notes[i - 1].HashString) 

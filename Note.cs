@@ -14,7 +14,11 @@ namespace blockchain
 		public Note(string text)
 		{
 			this.text = text;
+			ComputeHash(text);
+		}
 
+		private void ComputeHash(string text)
+		{
 			SHA256 sha = SHA256.Create(); //Creating SHA256 object
 			byte[] textBytes = Encoding.Default.GetBytes(text); //Converting text to bytes
 
@@ -47,6 +51,9 @@ namespace blockchain
 		{
 			get
 			{
+				//We need to compute hash every time we checking it
+				//So we will be sure it is valid
+				ComputeHash(this.text); 
 				return Encoding.Default.GetString(this.hash);
 			}
 		}
