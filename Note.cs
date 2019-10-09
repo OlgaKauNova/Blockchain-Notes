@@ -4,26 +4,27 @@ using System.Security.Cryptography;
 
 namespace blockchain
 {
+	///<Summary>Note based on blockchain technology</Summary>
 	class Note
 	{
 		public static string Splitter = "_splitter_";
 		private string text;
-
 		private byte[] hash;
 
 		public Note(string text)
 		{
 			this.text = text;
 
-			SHA256 sha = SHA256.Create();
+			SHA256 sha = SHA256.Create(); //Creating SHA256 object
+			byte[] textBytes = Encoding.Default.GetBytes(text); //Converting text to bytes
 
-			byte[] textBytes = Encoding.Default.GetBytes(text);
-
-			this.hash = sha.ComputeHash(textBytes);
+			this.hash = sha.ComputeHash(textBytes); //Computing bytes to hash
 		}
 
+		///<Summary>Full text of the note</Summary>
 		public string Text { get { return this.text; } }
 
+		///<Summary>Clear text of the note withous hash of the previous block</Summary>
 		public string ClearText
 		{
 			get
@@ -32,6 +33,7 @@ namespace blockchain
 			}
 		}
 
+		///<Summary>Hash of the previous block</Summary>
 		public string PreviousHash
 		{
 			get
@@ -40,6 +42,7 @@ namespace blockchain
 			}
 		}
 
+		///<Summary>Hash of this block</Summary>
 		public string HashString
 		{
 			get
@@ -48,6 +51,7 @@ namespace blockchain
 			}
 		}
 
+		///<Summary>Hash of this block as bytes</Summary>
 		public byte[] Hash { get { return this.hash; } }
 
 	}
