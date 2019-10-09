@@ -35,7 +35,7 @@ namespace blockchain
 		{
 			get
 			{
-				return this.text.Remove(this.text.IndexOf(' ') + 1);
+				return this.text.Remove(this.text.IndexOf(' '));
 			}
 		}
 

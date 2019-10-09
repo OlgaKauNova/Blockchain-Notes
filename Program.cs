@@ -101,9 +101,8 @@ namespace blockchain
 				else
 				{
 					Console.ForegroundColor = ConsoleColor.White;
-					Console.WriteLine($"Previous hash: {notes[i].PreviousHash} | Current hash: {notes[i - 1].HashString}");
 
-					if(notes[i].PreviousHash == notes[i - 1].HashString)
+					if(@notes[i].PreviousHash == @notes[i - 1].HashString)
 					{
 						Console.ForegroundColor = ConsoleColor.Green;
 						Console.WriteLine(i + " - Valid");
@@ -112,7 +111,6 @@ namespace blockchain
 					{
 						Console.ForegroundColor = ConsoleColor.Red;
 						Console.WriteLine((i - 1) + " - Changed");
-						break;
 					}
 				}
 			}
