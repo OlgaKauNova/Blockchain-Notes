@@ -18,8 +18,7 @@ namespace blockchain
 		{
 			List<Note> notes = new List<Note>(); //Creating notes list
 
-			notes.Add(new Note("start First note")); //Adding first note
-
+			notes.Add(new Note("start" + Note.Splitter + "First note")); //Adding first note
 
 			string command = "";
 			
