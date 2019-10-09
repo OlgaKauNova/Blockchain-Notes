@@ -6,6 +6,7 @@ namespace blockchain
 {
 	class Note
 	{
+		public static string Splitter = "_splitter_";
 		private string text;
 
 		private byte[] hash;
@@ -27,7 +28,7 @@ namespace blockchain
 		{
 			get
 			{
-				return this.text.Remove(0, this.text.IndexOf(' ') + 1);
+				return this.text.Remove(0, this.text.IndexOf(Note.Splitter) + Note.Splitter.Length);
 			}
 		}
 
@@ -35,7 +36,7 @@ namespace blockchain
 		{
 			get
 			{
-				return this.text.Remove(this.text.IndexOf(' '));
+				return this.text.Remove(this.text.IndexOf(Note.Splitter));
 			}
 		}
 

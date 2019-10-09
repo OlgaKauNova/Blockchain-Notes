@@ -16,9 +16,9 @@ namespace blockchain
 	{
 		static void Main(string[] args)
 		{
-			List<Note> notes = new List<Note>();
+			List<Note> notes = new List<Note>(); //Creating notes list
 
-			notes.Add(new Note("start First note"));
+			notes.Add(new Note("start First note")); //Adding first note
 
 
 			string command = "";
@@ -29,6 +29,7 @@ namespace blockchain
 			{
 				Console.Clear();
 
+				//Asking what the user wants to do
 				Console.ForegroundColor = ConsoleColor.Green;
 				Console.WriteLine("Actions: ");
 
@@ -44,10 +45,12 @@ namespace blockchain
 
 				try
 				{
-					com = (Command)Convert.ToInt32(command);
+					//If user enters some of the actions number than we convert it to Command type
+					com = (Command)Convert.ToInt32(command); 
 				}
 				catch(Exception e)
 				{
+					//If the input wasn't correct we just show all notes
 					com = Command.Show;
 					Console.WriteLine(e.Message);
 				}
@@ -85,15 +88,14 @@ namespace blockchain
 
 				Console.ReadKey();
 			}
-
-			
 		}
 
+		///<summary>Checking if any of the notes was changed</summary>
 		static void ValidateNotes(List<Note> notes)
 		{
 			for(int i = 0; i < notes.Count; i++)
 			{
-				if(i == 0)
+				if(i == 0) //Do not check first note
 				{
 					Console.ForegroundColor = ConsoleColor.Green;
 					Console.WriteLine("0 - Valid");
@@ -101,25 +103,28 @@ namespace blockchain
 				else
 				{
 					Console.ForegroundColor = ConsoleColor.White;
-
-					if(@notes[i].PreviousHash == @notes[i - 1].HashString)
+					//If current note's hash part of the text equal hash of the previous note
+					//then it's okay
+					if(@notes[i].PreviousHash == @notes[i - 1].HashString) 
 					{
 						Console.ForegroundColor = ConsoleColor.Green;
 						Console.WriteLine(i + " - Valid");
 					}
-					else
+					else //Otherwise we say that something was changed
 					{
+						Console.WriteLine($"\n\n | {notes[i].PreviousHash} | {notes[i - 1].HashString} | \n\n");
 						Console.ForegroundColor = ConsoleColor.Red;
-						Console.WriteLine((i - 1) + " - Changed");
+						Console.WriteLine(i + " - Changed");
 					}
 				}
 			}
+
 			Console.WriteLine("\n");
 		}
 
 		static void AddNote(string text, List<Note> notes)
 		{
-			notes.Add(new Note(notes[notes.Count - 1].HashString + " " + text));
+			notes.Add(new Note(notes[notes.Count - 1].HashString + Note.Splitter + text));
 		}
 
 		static void WriteAllNotes(List<Note> notes)
@@ -157,7 +162,7 @@ namespace blockchain
 
 		static void WriteNoteFull(Note n)
 		{
-			Console.WriteLine($"Text: {n.Text} | ClearText: {n.ClearText} | HashString: {n.HashString}");
+			Console.WriteLine($"Text: {n.Text} \nClearText: {n.ClearText}  \nHashString: {n.HashString} \n\n");
 		}
 	}
 }
